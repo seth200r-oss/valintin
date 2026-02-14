@@ -2,48 +2,69 @@
 <html>
 <head>
     <title>Happy Valentine's Day ❤️</title>
+
+    <!-- 🔥 IMPORTANT FOR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ff9a9e, #fecfef);
             margin: 0;
-            padding-top: 100px;
-            overflow: hidden;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         h1 {
             color: white;
-            font-size: 40px;
+            font-size: 28px;
+            margin-bottom: 10px;
         }
 
         p {
             color: white;
-            font-size: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        h2 {
+            color: white;
+            font-size: 18px;
         }
 
         .container {
             position: relative;
-            height: 300px;
+            margin-top: 20px;
+            height: 120px;
         }
 
         button {
-            padding: 12px 25px;
-            font-size: 18px;
+            padding: 12px 20px;
+            font-size: 16px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            margin: 20px;
-            transition: 0.3s;
+            margin: 10px;
         }
 
         #yesBtn {
-            background-color: #ff4d88;
+            background-color: #ff2e63;
             color: white;
-        }
-
-        #yesBtn:hover {
-            transform: scale(1.1);
         }
 
         #noBtn {
@@ -53,15 +74,16 @@
         }
 
         #gift {
-            font-size: 100px;
+            font-size: 80px;
             cursor: pointer;
             display: none;
+            margin-top: 20px;
             animation: bounce 1s infinite;
         }
 
         @keyframes bounce {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
             100% { transform: translateY(0); }
         }
 
@@ -71,9 +93,8 @@
         }
 
         video {
-            width: 400px;
-            border-radius: 20px;
-            box-shadow: 0px 0px 20px pink;
+            width: 100%;
+            border-radius: 15px;
         }
     </style>
 </head>
@@ -84,28 +105,37 @@
         <source src="music.mp3" type="audio/mp3">
     </audio>
 
-    <!-- 🎙️ Voice Over -->
+    <!-- 🎙️ Voice -->
     <audio id="voiceOver">
         <source src="voice.ogg" type="audio/ogg">
     </audio>
 
-    <h1>Happy Valentine's Day ❤️</h1>
-    <p>I miss u so much every moment. I just hope that you can work there to gain a lot experience and be safe. Please eat the good food and take care your skin as well. but even you are black, you still look so cute 💕</p>
+    <div class="card">
 
-    <div class="container">
-        <h2 style="color:white;">Click yes if you love me, click No if you are not! 🥰</h2>
+        <h1>Happy Valentine's Day ❤️</h1>
 
-        <button id="yesBtn" onclick="showGift()">Yes 💖</button>
-        <button id="noBtn">No 😢</button>
-    </div>
+        <p>
+            I miss u so much every moment. I just hope that you can work there 
+            to gain a lot experience and be safe. Please eat good food and 
+            take care your skin as well. But even you are black, you still look so cute 💕
+        </p>
 
-    <div id="gift" onclick="openGift()">🎁</div>
+        <div class="container">
+            <h2>Click Yes if you love me 🥰</h2>
 
-    <div id="videoContainer">
-        <h2 style="color:white;">This is for you 💝</h2>
-        <video id="loveVideo" controls muted>
-            <source src="Gift.mp4" type="video/mp4">
-        </video>
+            <button id="yesBtn" onclick="showGift()">Yes 💖</button>
+            <button id="noBtn">No 😢</button>
+        </div>
+
+        <div id="gift" onclick="openGift()">🎁</div>
+
+        <div id="videoContainer">
+            <h2>This is for you 💝</h2>
+            <video id="loveVideo" controls muted>
+                <source src="Gift.mp4" type="video/mp4">
+            </video>
+        </div>
+
     </div>
 
     <script>
@@ -114,16 +144,13 @@
         const voiceOver = document.getElementById("voiceOver");
         const video = document.getElementById("loveVideo");
 
-        // Start background music after first click
         document.body.addEventListener("click", function() {
             bgMusic.play();
         }, { once: true });
 
-        // Make NO button run away
         noBtn.addEventListener("mouseover", function() {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-
+            const x = Math.random() * 200;
+            const y = Math.random() * 80;
             noBtn.style.left = x + "px";
             noBtn.style.top = y + "px";
         });
@@ -137,10 +164,7 @@
             document.getElementById("gift").style.display = "none";
             document.getElementById("videoContainer").style.display = "block";
 
-            // Lower background music volume
             bgMusic.volume = 0.3;
-
-            // Play video + voice together
             video.play();
             voiceOver.play();
         }
