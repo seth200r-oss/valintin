@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Valentine's Day ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fecfef);
+            margin: 0;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: white;
+            font-size: 40px;
+        }
+
+        p {
+            color: white;
+            font-size: 20px;
+        }
+
+        .container {
+            position: relative;
+            height: 300px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 20px;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d88;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: gray;
+            color: white;
+            position: absolute;
+        }
+
+        #gift {
+            font-size: 100px;
+            cursor: pointer;
+            display: none;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
+        #videoContainer {
+            display: none;
+            margin-top: 20px;
+        }
+
+        video {
+            width: 400px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px pink;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🎵 Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- 🎙️ Voice Over -->
+    <audio id="voiceOver">
+        <source src="voice.ogg" type="audio/ogg">
+    </audio>
+
+    <h1>Happy Valentine's Day ❤️</h1>
+    <p>I miss u so much every moment. I just hope that you can work there to gain a lot experience and be safe. Please eat the good food and take care your skin as well. but even you are black, you still look so cute 💕</p>
+
+    <div class="container">
+        <h2 style="color:white;">Click yes if you love me, click No if you are not! 🥰</h2>
+
+        <button id="yesBtn" onclick="showGift()">Yes 💖</button>
+        <button id="noBtn">No 😢</button>
+    </div>
+
+    <div id="gift" onclick="openGift()">🎁</div>
+
+    <div id="videoContainer">
+        <h2 style="color:white;">This is for you 💝</h2>
+        <video id="loveVideo" controls muted>
+            <source src="Gift.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const bgMusic = document.getElementById("bgMusic");
+        const voiceOver = document.getElementById("voiceOver");
+        const video = document.getElementById("loveVideo");
+
+        // Start background music after first click
+        document.body.addEventListener("click", function() {
+            bgMusic.play();
+        }, { once: true });
+
+        // Make NO button run away
+        noBtn.addEventListener("mouseover", function() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        });
+
+        function showGift() {
+            document.querySelector(".container").style.display = "none";
+            document.getElementById("gift").style.display = "block";
+        }
+
+        function openGift() {
+            document.getElementById("gift").style.display = "none";
+            document.getElementById("videoContainer").style.display = "block";
+
+            // Lower background music volume
+            bgMusic.volume = 0.3;
+
+            // Play video + voice together
+            video.play();
+            voiceOver.play();
+        }
+    </script>
+
+</body>
+</html>
